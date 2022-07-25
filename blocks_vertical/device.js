@@ -44,6 +44,24 @@ Blockly.Blocks['event_whenarduinobegin'] = {
   }
 };
 
+Blockly.Blocks['event_whenarduinobegin1'] = {
+  /**
+   * Block for when arduino begin.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "id": "event_whenarduinobegin1",
+      "message0":'===主程序===',
+      "nextStatement": null,
+      "category": Blockly.Categories.event,
+      "colour": Blockly.Colours.event.primary,
+      "colourSecondary": Blockly.Colours.event.secondary,
+      "colourTertiary": Blockly.Colours.event.tertiary
+    });
+  }
+};
+
 Blockly.Blocks['event_whenmicropythonbegin'] = {
   /**
    * Block for when arduino begin.

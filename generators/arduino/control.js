@@ -44,7 +44,7 @@ Blockly.Arduino['control_repeat'] = function(block) {
 
 Blockly.Arduino['control_forever'] = function(block) {
   if (Blockly.Arduino.firstLoop && !block.getSurroundParent()
-    && block.getRootBlock().type === 'event_whenarduinobegin') {
+    && (block.getRootBlock().type === 'event_whenarduinobegin' || block.getRootBlock().type === 'event_whenarduinobegin1')) {
     Blockly.Arduino.firstLoop = false;
 
     var branch = Blockly.Arduino.statementToCode(block, 'SUBSTACK');

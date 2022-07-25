@@ -30,3 +30,10 @@ Blockly.Arduino['event_whenarduinobegin'] = function() {
   return code;
 };
 
+Blockly.Arduino['event_whenarduinobegin1'] = function() {
+  Blockly.Arduino.includes_["arduino"] = "#include <ZQrobot.h>";
+  Blockly.Arduino.setups_["arduino"] = "Zqrobot.init();";
+  var code = "";
+  return code;
+};
+
