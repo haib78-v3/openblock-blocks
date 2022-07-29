@@ -131,6 +131,23 @@ Blockly.Arduino['arduino_pin_ZQEEPROMread'] = function(block) {
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
+Blockly.Arduino['arduino_pin_ZQEEPROMupdate202'] = function(block) {
+  var arg0 = Blockly.Arduino.valueToCode(block, 'PIN', Blockly.Arduino.ORDER_UNARY_POSTFIX) || 0;
+  var arg1 = Blockly.Arduino.valueToCode(block, 'OUT', Blockly.Arduino.ORDER_UNARY_POSTFIX) || 0;
+  Blockly.Arduino.includes_['ZQEEPROMupdate'] = '#include <EEPROM.h>';
+  var code = 'EEPROM.writeZQ(' + arg0 + ', ' + arg1 + ');\n';//EEPROM.write(addr, val);
+  return code;
+};
+
+Blockly.Arduino['arduino_pin_ZQEEPROMread202'] = function(block) {
+  var arg0 = Blockly.Arduino.valueToCode(block, 'PIN', Blockly.Arduino.ORDER_UNARY_POSTFIX) || 0;
+
+  Blockly.Arduino.includes_['ZQEEPROMupdate'] = '#include <EEPROM.h>';
+
+  var code = "EEPROM.readZQ(" + arg0 + ")";
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
 Blockly.Arduino['arduino_pin_ZQdataMap'] = function(block) {
   var arg0 = Blockly.Arduino.valueToCode(block, 'DATA', Blockly.Arduino.ORDER_UNARY_POSTFIX) || 0;
   var arg1 = Blockly.Arduino.valueToCode(block, 'ARG0', Blockly.Arduino.ORDER_UNARY_POSTFIX) || 0;
@@ -156,12 +173,26 @@ Blockly.Arduino['arduino_pin_ZQserialPrint'] = function(block) {
   return code;
 };
 
+Blockly.Arduino['arduino_pin_ZQserialPrint202'] = function(block) {
+  var arg0 = Blockly.Arduino.valueToCode(block, 'VALUE', Blockly.Arduino.ORDER_UNARY_POSTFIX) || '';
+  var eol = block.getFieldValue('EOL') || 'warp';
+  Blockly.Arduino.setups_['ZQserialPrint'] = 'Serial.begin(115200);';
+  var code = '';
+  if (eol === 'warp') {
+    code = 'Serial.println(' + arg0 + ');\n';
+  } else {
+    code = 'Serial.print(' + arg0 + ');\n';
+  }
+  return code;
+};
+
 Blockly.Arduino['arduino_pin_ZQserialAvailable'] = function() {
 
   Blockly.Arduino.setups_['ZQserialPrint'] = 'Serial.begin(9600);';
   var code = "Serial.available()";
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 }
+
 
 Blockly.Arduino['arduino_pin_ZQserialReadData'] = function() {
 
@@ -300,7 +331,7 @@ Blockly.Arduino['arduino_Controller_setwx202'] = function(block) {
   var wxid1= arg0.substr(1,2);
   var wxid2= arg0.substr(3,2);
   Blockly.Arduino.includes_['setwx202'] = '#include <Ps3Controller.h>';
-  Blockly.Arduino.setups_['setwx202'] = 'Ps3.begin("01:02:03:04:' + wxid1 + ':' + wxid2 + '");\nwhile (!Ps3.isConnected());\nPs3.setRumble(100.0, 500);';
+  Blockly.Arduino.setups_['setwx202'] = 'Ps3.begin("01:02:03:04:' + wxid1 + ':' + wxid2 + '");\n  while (!Ps3.isConnected());\n  Ps3.setRumble(100.0, 500);';
   return '';
 };
 
